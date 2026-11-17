@@ -1726,3 +1726,73 @@ select:focus-visible {
     flex-basis: 56px;
   }
 }
+
+.organ-image-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.organ-image-glow {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: rgba(65, 204, 238, 0.16);
+  filter: blur(35px);
+}
+
+.organ-feature-image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  max-width: 420px;
+  max-height: 300px;
+  object-fit: contain;
+  display: block;
+}
+
+.organ-image-stage .model-caption {
+  z-index: 2;
+}
+.booking-site-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  padding: 12px 4%;
+  background: #fff;
+  border-bottom: 1px solid #dceaf5;
+}
+
+.booking-site-nav button {
+  border: none;
+  background: transparent;
+  color: #0755a9;
+  font-weight: 700;
+  cursor: pointer;
+}
+.organ-model-image {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.organ-preview,
+.organ-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}

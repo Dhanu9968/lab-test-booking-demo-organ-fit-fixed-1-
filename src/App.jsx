@@ -5,7 +5,9 @@ import {
   CalendarDays, Clock3, CheckCircle2, ArrowLeft, HeartPulse, Menu
 } from "lucide-react";
 import OrganScene from "./OrganScene";
-
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const organs = [
   {
@@ -251,7 +253,7 @@ function SchedulePage({ schedule, setSchedule, confirm }) {
 export default function App() {
   const [selectedOrgan, setSelectedOrgan] = useState("Liver");
   const [cart, setCart] = useState([]);
-  const [page, setPage] = useState("home");
+ const [page, setPage] = useState("landing");
   const [patient, setPatient] = useState({ name: "", age: "", gender: "", mobile: "", email: "" });
   const [schedule, setSchedule] = useState({ date: "", slot: "", collection: "Visit collection centre" });
   const [bookingId, setBookingId] = useState("");
@@ -261,7 +263,7 @@ export default function App() {
   const removeFromCart = (id) => setCart(current => current.filter(x => x.id !== id));
 
   React.useEffect(() => {
-    const goBack = () => setPage("home");
+    const goBack = () => setPage("tests");
     window.addEventListener("back-home", goBack);
     return () => window.removeEventListener("back-home", goBack);
   }, []);
@@ -273,7 +275,20 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      {page === "home" && (
+      {page === "landing" && <Home setPage={setPage} />}
+
+{page === "about" && <About setPage={setPage} />}
+
+{page === "contact" && <Contact setPage={setPage} />}
+      {["tests", "patient", "schedule"].includes(page) && (
+  <div className="booking-site-nav">
+    <button onClick={() => setPage("landing")}>Home</button>
+    <button onClick={() => setPage("about")}>About Us</button>
+    <button onClick={() => setPage("contact")}>Contact Us</button>
+    <button onClick={() => setPage("tests")}>Explore Tests</button>
+  </div>
+)}
+      {page === "tests" && (
         <main>
           <section className="organ-section">
             <div className="section-heading"><div><span className="eyebrow">EXPLORE BY HEALTH CATEGORY</span><h2>Choose an organ or health test</h2></div><span className="swipe-hint">Select a category to view tests <ChevronRight size={15} /></span></div>
@@ -316,7 +331,7 @@ export default function App() {
       )}
       {page === "patient" && <main className="flow-page"><PatientPage patient={patient} setPatient={setPatient} next={() => setPage("schedule")} /><div className="flow-summary"><h3>Booking Summary</h3><p>{cart.length} selected tests</p><strong>{money(total)}</strong>{cart.map(item => <div key={item.id} className="summary-line"><span>{item.name}</span><b>{money(item.price)}</b></div>)}</div></main>}
       {page === "schedule" && <main className="flow-page"><SchedulePage schedule={schedule} setSchedule={setSchedule} confirm={finishBooking} /><div className="flow-summary"><h3>Patient & Test Summary</h3><p>{patient.name} · {patient.mobile}</p><strong>{money(total)}</strong>{cart.map(item => <div key={item.id} className="summary-line"><span>{item.name}</span><b>{money(item.price)}</b></div>)}</div></main>}
-      {page === "success" && <main className="success-page"><div className="success-card"><div className="success-check"><CheckCircle2 size={58} /></div><span className="eyebrow">BOOKING REQUEST CONFIRMED</span><h1>Thank you, {patient.name}!</h1><p>Your demo booking has been created successfully.</p><div className="booking-id">Booking ID <strong>{bookingId}</strong></div><div className="success-details"><p><CalendarDays size={17} /> {schedule.date}</p><p><Clock3 size={17} /> {schedule.slot}</p><p><FlaskConical size={17} /> {cart.length} tests · {money(total)}</p></div><button className="checkout-btn" onClick={() => { setPage("home"); setCart([]); }}>Back to Home</button><small>This is a frontend demo. No real appointment or payment has been submitted.</small></div></main>}
+      {page === "success" && <main className="success-page"><div className="success-card"><div className="success-check"><CheckCircle2 size={58} /></div><span className="eyebrow">BOOKING REQUEST CONFIRMED</span><h1>Thank you, {patient.name}!</h1><p>Your demo booking has been created successfully.</p><div className="booking-id">Booking ID <strong>{bookingId}</strong></div><div className="success-details"><p><CalendarDays size={17} /> {schedule.date}</p><p><Clock3 size={17} /> {schedule.slot}</p><p><FlaskConical size={17} /> {cart.length} tests · {money(total)}</p></div><button className="checkout-btn" onClick={() => { setPage("landind"); setCart([]); }}>Back to Home</button><small>This is a frontend demo. No real appointment or payment has been submitted.</small></div></main>}
       <footer className="footer"><span>Lab Test Booking System</span><span>Interactive demo · Frontend only</span></footer>
     </div>
   );
