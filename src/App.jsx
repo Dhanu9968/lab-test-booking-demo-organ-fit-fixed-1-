@@ -291,7 +291,7 @@ export default function App() {
       {page === "tests" && (
         <main>
           <section className="organ-section">
-            <div className="section-heading"><div><span className="eyebrow">EXPLORE BY HEALTH CATEGORY</span><h2>Choose an organ or health test</h2></div><span className="swipe-hint">Select a category to view tests <ChevronRight size={15} /></span></div>
+            <div className="section-heading"><div><span className="eyebrow">EXPLORE BY HEALTH CATEGORY</span><h2>Choose an organ or health test</h2></div><span className="swipe-hint"><ChevronRight size={15} /></span></div>
             <div className="organ-grid">
               {organs.map((organ) => (
   <button
